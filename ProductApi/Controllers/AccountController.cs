@@ -16,14 +16,14 @@ namespace ProductApi.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult RegisterUser([FromBody] RegisterUserDTO registerUserDTO)
+        public ActionResult RegisterUserDto([FromBody] RegisterUserDTO registerUserDTO)
         {
             _accountService.RegisterUser(registerUserDTO);
             return Ok();
         }
 
         [HttpPost("login")]
-        public ActionResult Login([FromBody] LoginDTO loginDTO)
+        public ActionResult LoginDto([FromBody] LoginDTO loginDTO)
         {
             string token = _accountService.GenerateJwt(loginDTO);
             return Ok(token);

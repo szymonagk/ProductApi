@@ -22,8 +22,8 @@ namespace ProductApi.Services
 
             if (userProduct.IsFlagged != productDTO.IsFlagged)
                 return true;
-            else
-                return false;
+
+            return false;
         }
 
         public bool ShouldAddToTotalFlags(ProductIdAndUserFlagDTO productDTO, int userId)
@@ -37,11 +37,9 @@ namespace ProductApi.Services
                 _userProductRepository.Add(userProduct);
                 return true;
             }
-            else
-            {
-                _userProductRepository.Delete(userProduct);
-                return false;
-            }
+
+            _userProductRepository.Delete(userProduct);
+            return false;
         }
 
         public int AddOrUpdateUserProductAndReturnValueOfModifying(UserProduct userProduct)
@@ -66,12 +64,9 @@ namespace ProductApi.Services
             return valueOfModifying;
         }
 
-        public bool GetUserFlagByProductId(int userId, int productId)
+        public List<UserProduct> GetAllUserProductsByUserId(int userId)
         {
-            var userProduct = _userProductRepository.GetByProductIdAndUserId(productId, userId);
-            if (userProduct == null)
-                return false;
-            return userProduct.IsFlagged;
+            return _userProductRepository.GetAllByUserId(userId);
         }
     }
 }

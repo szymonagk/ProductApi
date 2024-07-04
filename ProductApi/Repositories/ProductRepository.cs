@@ -14,12 +14,18 @@ namespace ProductApi.Repositories
 
         public List<Product> GetAll()
         {
-            return _context.Products.Include(p => p.Variants).Include(p => p.Images).ToList();
+            return _context.Products
+                .Include(p => p.Variants)
+                .Include(p => p.Images)
+                .ToList();
         }
 
         public Product? GetById(int id)
         {
-            return _context.Products.Include(p => p.Variants).Include(p => p.Images).FirstOrDefault(p => p.Id == id);
+            return _context.Products
+                .Include(p => p.Variants)
+                .Include(p => p.Images)
+                .FirstOrDefault(p => p.Id == id);
         }
 
         public void Update(Product product)

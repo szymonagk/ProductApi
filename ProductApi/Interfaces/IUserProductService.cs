@@ -8,6 +8,6 @@ namespace ProductApi.Interfaces
         bool CheckIfFlagChanged(ProductIdAndUserFlagDTO productDTO, int userId);
         bool ShouldAddToTotalFlags(ProductIdAndUserFlagDTO productDTO, int userId);
         int AddOrUpdateUserProductAndReturnValueOfModifying(UserProduct userProduct);
-        bool GetUserFlagByProductId(int userId, int productId);
+        List<UserProduct> GetAllUserProductsByUserId(int userId);
     }
 }

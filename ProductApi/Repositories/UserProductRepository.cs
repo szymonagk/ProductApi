@@ -13,7 +13,8 @@ namespace ProductApi.Repositories
 
         public UserProduct? GetByProductIdAndUserId(int productId, int userId)
         {
-            return _context.UsersProducts.FirstOrDefault(u => u.ProductId == productId && u.UserId == userId);
+            return _context.UsersProducts
+                .FirstOrDefault(u => u.ProductId == productId && u.UserId == userId);
         }
 
         public void Add(UserProduct userProduct)
@@ -26,6 +27,11 @@ namespace ProductApi.Repositories
         {
             _context.UsersProducts.Remove(userProduct);
             _context.SaveChanges();
+        }
+
+        public List<UserProduct> GetAllByUserId(int userId)
+        {
+            return _context.UsersProducts.Where(up => up.UserId == userId).ToList();
         }
     }
 }

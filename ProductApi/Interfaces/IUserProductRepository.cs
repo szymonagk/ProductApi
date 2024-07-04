@@ -7,5 +7,6 @@ namespace ProductApi.Interfaces
         UserProduct? GetByProductIdAndUserId(int productId, int userId);
         void Add(UserProduct userProduct);
         void Delete(UserProduct userProduct);
+        List<UserProduct> GetAllByUserId(int userId);
     }
 }

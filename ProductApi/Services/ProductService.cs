@@ -27,16 +27,20 @@ namespace ProductApi.Services
         public List<ProductWithUserFlagDTO> GetAllProductsWithUserFlag(int userId)
         {
             var products = _productRepository.GetAll();
+            var userProducts = _userProductService.GetAllUserProductsByUserId(userId);
             List<ProductWithUserFlagDTO> productsWithUserFlag = new List<ProductWithUserFlagDTO>();
 
             foreach (var product in products)
             {
                 var productWithUserFlagDTO = _mapper.Map<ProductWithUserFlagDTO>(product);
-                productWithUserFlagDTO.IsFlaggedByUser = _userProductService.GetUserFlagByProductId(userId, product.Id);
+                var userProduct = userProducts.Where(up => up.UserId == userId && up.ProductId == product.Id).FirstOrDefault();
+                if (userProduct == null)
+                    productWithUserFlagDTO.IsFlaggedByUser = false;
+                else
+                    productWithUserFlagDTO.IsFlaggedByUser = userProduct.IsFlagged;
 
                 productsWithUserFlag.Add(productWithUserFlagDTO);
             }
-
             return productsWithUserFlag;
         }
 

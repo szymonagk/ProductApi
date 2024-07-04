@@ -12,8 +12,8 @@ using ProductApi;
 namespace ProductApi.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20240704032208_final")]
-    partial class final
+    [Migration("20240704085734_Final")]
+    partial class Final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
